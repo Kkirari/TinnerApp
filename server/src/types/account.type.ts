@@ -27,7 +27,7 @@ export const _profile = t.Object({
     location: t.Optional(t.String()),
     age: t.Optional(t.String()),
     last_active: t.Optional(t.String()),
-    createc_at: t.Optional(t.String()),
+    created_at: t.Optional(t.String()),
     updated_at: t.Optional(t.String()),
 
     //photoid []:Next ==>
