@@ -52,11 +52,11 @@ schema.methods.toUser = function (): user {
         id: this._id.toString(),
         display_name: this.display_name,
         username: this.username,
-        created_at: this.created_at,
-        updated_at: this.updated_at,
+        created_at: this.created_at ? this.created_at.toISOString() : undefined,
+        updated_at: this.updated_at ? this.updated_at.toISOString() : undefined,
         // date_of_birth: this.date_of_birth,
         age: ageString,
-        last_active: this.last_active,
+        last_active: this.last_active ? this.last_active.toISOString() : undefined,
         introduction: this.introduction,
         interest: this.interest,
         looking_for: this.looking_for,
@@ -78,7 +78,7 @@ schema.statics.createUser = async function (registerData: register): Promise<IUs
     const newUser = await new this({
         display_name: registerData.display_name,
         username: registerData.username,
-        passwprd_hash: await Bun.password.hash(registerData.password),
+        password_hash: await Bun.password.hash(registerData.password),
         date_of_birth: registerData.date_of_birth,
         looking_for: registerData.looking_for
     })
