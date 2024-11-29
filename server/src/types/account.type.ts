@@ -1,7 +1,7 @@
 import { profile } from "console";
 import Elysia, { Static, t } from "elysia";
 import { register } from "module";
-import { _user } from "./user.type";
+import { _user, _UserAndToken } from "./user.type";
 import { _register } from "./register.type";
 
 export const _login = t.Object({
@@ -11,16 +11,13 @@ export const _login = t.Object({
 
 
 
-export const _account = t.Object({
-    user: _user,
-    token: t.String()
-})
-
 export const AccountDto = new Elysia().model({
+    //request
     register: _register,
     login: _login,
 
-    account: _account
+    //response
+    user_and_token: _UserAndToken
 })
 
 

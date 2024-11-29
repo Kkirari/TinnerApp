@@ -9,6 +9,7 @@ import { AccountController } from "./controllers/account.controller";
 import { UserController } from "./controllers/user.controller";
 
 
+
 MongoDB.connect()
 const app = new Elysia()
   .use(cors())
