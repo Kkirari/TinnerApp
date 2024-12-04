@@ -53,7 +53,7 @@ schema.methods.toUser = function (): user {
         id: this._id.toString(),
         display_name: this.display_name,
         username: this.username,
-        created_at: this.created_at ? this.created_at.toISOString() : undefined,
+        create_at: this.created_at ? this.created_at.toISOString() : undefined,
         updated_at: this.updated_at ? this.updated_at.toISOString() : undefined,
         // date_of_birth: this.date_of_birth,
         age: ageString,

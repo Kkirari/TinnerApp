@@ -10,15 +10,17 @@ export const _profile = t.Object({
     interest: t.Optional(t.String()),
     location: t.Optional(t.String()),
     age: t.Optional(t.String()),
-    last_active: t.Optional(t.String()),
-    created_at: t.Optional(t.String()),
-    updated_at: t.Optional(t.String()),
-
-    //photoid []:Next ==>
-});
+    last_active: t.Optional(t.Date()),
+    create_at: t.Optional(t.Date()),
+    updated_at: t.Optional(t.Date()),
+    //todo:implement image feature
+    //photo:photo_id[]
+})
 export const _user = t.Object({
     ..._profile.properties,
-    //like , follower[] , wing[] Next implement
+    //todo:implement like feature
+    //followers:profile[]
+    //following:profile[]
 })
 
 export const _UserAndToken = t.Object({
@@ -31,17 +33,10 @@ const _userPagination = t.Object({
     username: t.Optional(t.String()),
     min_age: t.Optional(t.Number()),
     max_age: t.Optional(t.Number()),
-    looking_for: t.Union([
-        t.Literal('male'),
-        t.Literal('female'),
-        t.Literal('all'),
-    ]),
-    gender: t.Optional(t.Union([
-        t.Literal('male'),
-        t.Literal('female'),
-        t.Literal('all'),
-    ])),
+    looking_for: t.Optional(t.Union([t.Literal('male'), t.Literal('female'), t.Literal('all')])),
+    gender: t.Optional(t.Union([t.Literal('male'), t.Literal('female'), t.Literal('all')])),
 })
+
 
 export const _updateProfile = t.Omit(_profile, ['id', 'username', 'updated_at', 'created_at', 'last_active', 'age'])
 export const _userPaginator = CreatePagination(_user, _userPagination)
@@ -49,11 +44,23 @@ export const _userPaginator = CreatePagination(_user, _userPagination)
 export const UserDto = new Elysia().model({
     pagination: t.Optional(_userPagination),
     updateProfile: _updateProfile,
-    Users: _userPaginator,
+    users: _userPaginator,
     user: _user
 })
 
+
 export type updatePhofile = Static<typeof _updateProfile>
 export type userPagination = Static<typeof _userPagination>
-export type userPaginator = Static<typeof _userPagination>
+export type userPaginator = Static<typeof _userPaginator>
 export type user = Static<typeof _user>
+
+
+
+
+
+
+
+
+
+
+

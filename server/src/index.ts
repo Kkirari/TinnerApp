@@ -7,6 +7,8 @@ import { MongoDB } from "./configs/database.config";
 import { jwtConfig } from "./configs/jwt.config";
 import { AccountController } from "./controllers/account.controller";
 import { UserController } from "./controllers/user.controller";
+import staticPlugin from "@elysiajs/static";
+import { PhotoContoller } from "./controllers/photo.controller";
 
 
 
@@ -18,6 +20,11 @@ const app = new Elysia()
   .use(example)
   .use(AccountController)
   .use(UserController)
+  .use(PhotoContoller)
+  .use(staticPlugin({
+    assets: "public/uploads",
+    prefix: "img"
+  }))
 
   .listen({
     port: Bun.env.PORT || 8000,
