@@ -20,7 +20,7 @@ export const QueryHelper = {
         }
 
         if (query.gender && query.gender !== 'all') {
-            const regEx = new RegExp(`^${query.gender.trim()}$`, 'i'); // Match gender exactly
+            const regEx = new RegExp(`^${query.gender.trim()}$`, 'i');
             const _filter = { gender: { $regex: regEx } };
             filter.push(_filter);
         }
