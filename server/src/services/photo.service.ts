@@ -37,15 +37,33 @@ export const PhotoService = {
         )
         return uploadPhoto.toPhoto()
     },
-    get: async function (user_id: string): Promise<photo[]> {
-        throw new Error("")
+    getPhoto: async function (user_id: string): Promise<photo[]> {
+        const photoDocs = await Photo.find({ user: user_id }).exec()
+        return photoDocs.map(doc => doc.toPhoto())
     }
     ,
     delete: async function (photo_id: string): Promise<boolean> {
-        throw new Error("")
+        const doc = await Photo.findById(photo_id).exec()
+        if (!doc)
+            throw new Error(`photo ${photo_id} not existing`)
+
+        await User.findByIdAndUpdate(doc.user, {
+            $pull: { photos: photo_id }
+        })
+        await Photo.findByIdAndDelete(photo_id)
+        await Cloudinary.uploader.destroy(doc.public_id)
+        return true
     },
     setAvatar: async function (photo_id: string, user_id: string): Promise<boolean> {
-        throw new Error("")
+        await Photo.updateMany(
+            { user: new mongoose.Types.ObjectId(user_id) },
+            { $set: { is_avatar: false } }
+        )
+        const result = await Photo.findByIdAndUpdate(photo_id,
+            { $set: { is_avatar: true } },
+            { new: true }
+        )
+        return !!result
     }
 
 }
