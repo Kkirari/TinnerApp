@@ -1,6 +1,6 @@
-import mongoose, { Types } from "mongoose";
-import { IPhotoDocument, IphotoModel } from "../interfaces/photo.interface";
-import { photo } from "../types/photo.type";
+import mongoose from "mongoose"
+import { IPhotoDocument, IphotoModel } from "../interfaces/photo.interface"
+import { photo } from "../types/photo.type"
 
 const schema = new mongoose.Schema<IPhotoDocument, IphotoModel>({
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
@@ -8,7 +8,7 @@ const schema = new mongoose.Schema<IPhotoDocument, IphotoModel>({
     url: { type: String, required: true },
     is_avatar: { type: Boolean, required: true, default: false },
 }, {
-    timestamps: { createdAt: 'create_at' }
+    timestamps: { createdAt: 'created_at' }
 })
 
 schema.methods.toPhoto = function (): photo {
@@ -17,7 +17,7 @@ schema.methods.toPhoto = function (): photo {
         url: this.url,
         public_id: this.public_id,
         is_avatar: this.is_avatar,
-        created_at: this.created_at
+        created_at: this.created_at,
     }
 }
 
