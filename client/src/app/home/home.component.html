@@ -1,6 +1,13 @@
-<p>home works!</p>
+@if(!user()){
 
-<button (click)="callError(500)">500</button>
-<button (click)="callError(400)">400</button>
-<button (click)="callError(503)">503</button>
-<button (click)="callError(404)">503</button>
+<div class="container">
+    <div class="welcome">
+        <h1>Welcome to tinner app</h1>
+        <h3>Come-on intro view your match</h3>
+        <p>Alright you will <a href="/login">Sign-in or Create an account?🧙🏻‍♂️</a></p>
+    </div>
+</div>
+}
+@if(user()){
+<app-member></app-member>
+}
