@@ -8,11 +8,11 @@ import { throwError } from 'rxjs'
 })
 export class ErrorService {
 
-  private router = inject(Router);
-  private snackBar = inject(MatSnackBar);
+  private router = inject(Router)
+  private snackBar = inject(MatSnackBar)
   private snackBarConfig: MatSnackBarConfig = {
     horizontalPosition: 'right',
-    verticalPosition: 'top',
+    verticalPosition: 'top'
   }
   constructor() { }
 
@@ -20,7 +20,7 @@ export class ErrorService {
     if (err) {
       switch (err.status) {
         case 400:
-          this.snackBar.open('Bad request', 'ok', this.snackBarConfig)
+          this.snackBar.open('Bad Request', 'ok', this.snackBarConfig)
           break
         case 404:
           this.router.navigate(['/404'])
@@ -49,10 +49,9 @@ export class ErrorService {
           this.router.navigate(['/server-error'], navExtra)
           break
         default:
-          this.snackBar.open("An error occurred", "Close", this.snackBarConfig)
+          this.snackBar.open('Something went wrong, please try again later.', 'ok', this.snackBarConfig)
           break
       }
-
     }
     return throwError(() => err)
   }

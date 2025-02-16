@@ -1,32 +1,34 @@
-import { QueryPagination, UserQueryPagination } from "../_models/pagination";
-import { User } from "../_models/user";
-const defaultAvatar = '/assets/images/default-avatar.png';
+import { QueryPagination, UserQueryPagination } from "../_models/pagination"
+import { User } from "../_models/user"
+
+const defaultAvatar = '/assets/defaultAvatar.png'
+const defaultImage = '/assets/default.png'
 
 function getAvatar(user: User): string {
     if (user.photos) {
-        const avatar = user.photos.find(p => p.is_avatar === true);
+        const avatar = user.photos.find(p => p.is_avatar === true)
         if (avatar)
-            return avatar.url;
+            return avatar.url
     }
-    return defaultAvatar;
+
+    return defaultAvatar
 }
 
 function getPhotoOfTheDay(user: User): string {
     if (user.photos && user.photos.length > 0) {
-        const index = Math.floor(Math.random() * user.photos.length);
-        return user.photos[index].url;
-
+        const index = Math.floor(Math.random() * user.photos.length)
+        return user.photos[index].url
     }
-    return defaultAvatar;
+    return defaultImage
 }
-export function parseUserPhoto(user: User): User {
-    user.avatar = getAvatar(user);
-    user.photoOfTheDay = getPhotoOfTheDay(user);
-    return user;
-}
-export function parseQuery(query: QueryPagination | UserQueryPagination): string {
-    // console.log("ssss");
 
+export function parseUserPhoto(user: User): User {
+    user.avatar = getAvatar(user)
+    user.photoOfTheDay = getPhotoOfTheDay(user)
+    return user
+}
+
+export function parseQuery(query: QueryPagination | UserQueryPagination): string {
     let queryString = '?'
     if (query.pageSize)
         queryString += `&pageSize=${query.pageSize}`

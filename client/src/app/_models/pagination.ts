@@ -16,17 +16,10 @@ export interface Paginator<T, U> {
 }
 export const default_pageSizeOption = [2, 5, 10, 25, 50, 100, 200]
 export const default_paginator = {
-
     pagination: {
-
-        pageSize: 10,
-
+        pageSize: 5,
         currentPage: 1,
-
-        length: 0
-
+        length: 1,
     },
-
     items: []
-
 }

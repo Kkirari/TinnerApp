@@ -6,15 +6,17 @@ import { NgxSpinnerService } from 'ngx-spinner'
 })
 export class LoadingService {
   loadingRequestCount = 0
+
   private spinner = inject(NgxSpinnerService)
   constructor() { }
 
   loading() {
     this.loadingRequestCount++
     this.spinner.show(undefined, {
-      type: "timer",
-      bdColor: 'rgba(0, 0, 0, 0.8)',
-      color: 'rgba(255, 255, 255, 0.8)'
+      type: "line-scale-pulse-out-rapid",
+      bdColor: 'rgba(0,0,0,0.8)',
+      color: 'rgb(246, 243, 243)',
+      fullScreen: false
     })
   }
 
