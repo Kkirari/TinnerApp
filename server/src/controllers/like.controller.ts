@@ -23,7 +23,7 @@ export const LikeController = new Elysia({
         body: "target_id"
     })
 
-    .get('/followers', async ({ Auth, query }) => {
+    .get('/follower', async ({ Auth, query }) => {
         const user_id = (Auth.payload as AuthPayload).id
         const pagination = await LikeSevice.getFollowers(user_id, query)
         return pagination

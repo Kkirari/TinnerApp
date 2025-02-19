@@ -1,5 +1,5 @@
 import mongoose, { RootFilterQuery } from "mongoose"
-import { updatePhofile, user, userPagination, userPaginator } from "../types/user.type"
+import { updateProfile, user, userPagination, userPaginator } from "../types/user.type"
 import { IUserDocument } from "../interfaces/user.interface"
 import { QueryHelper } from "../helpers/query.helper"
 import { User } from "../models/user.model"
@@ -32,7 +32,7 @@ export const UserService = {
             return user.toUser()
         throw new Error(`"${username}" is not found!`)
     },
-    updateProfile: async function (newProfile: updatePhofile, user_id: string): Promise<user> {
+    updateProfile: async function (newProfile: updateProfile, user_id: string): Promise<user> {
         const user = await User.findByIdAndUpdate(user_id, { $set: newProfile }, { new: true, runValidators: true })
         if (user)
             return user.toUser()
